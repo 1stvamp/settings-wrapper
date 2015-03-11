@@ -1,16 +1,15 @@
 import django_project
 from django_project import settings
+from threading import local
 from types import ModuleType
-from random import choice
-
-
-keys = ('foo', 'bar', 'baz')
 
 
 class module(ModuleType):
     def __getattr__(self, name):
         if name == 'STATIC_URL':
-            return settings.STATIC_URL_MAP[choice(keys)]
+            d = local()
+            request = d.django_current_request
+            return settings.STATIC_URL_MAP[request.META.get('HTTP_HOST')]
         return getattr(settings, name)
 
     def __setattr__(self, name, value):
