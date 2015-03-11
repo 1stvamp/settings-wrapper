@@ -3,3 +3,4 @@ STATIC_URL_MAP = {
     'bar': 'http://cdn.bar.com/',
     'baz': 'https://cdn.baz.com/',
 }
+STATIC_URL = 'http://cdn.example.com/'
